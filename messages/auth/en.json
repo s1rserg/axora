@@ -1,0 +1,39 @@
+{
+  "signIn": {
+    "title": "Sign In",
+    "description": "Enter your credentials to access your account",
+    "submit": "Sign In",
+    "noAccount": "Don't have an account?",
+    "link": "Sign up"
+  },
+  "signUp": {
+    "title": "Sign Up",
+    "description": "Create a new account to get started",
+    "submit": "Sign Up",
+    "hasAccount": "Already have an account?",
+    "link": "Sign in"
+  },
+  "fields": {
+    "email": "Email",
+    "password": "Password",
+    "username": "Username",
+    "confirmPassword": "Confirm Password",
+    "emailPlaceholder": "you@example.com"
+  },
+  "validation": {
+    "email": "Invalid email address",
+    "emailMax": "Email is too long",
+    "passwordMin": "Password must be at least 6 characters",
+    "passwordMax": "Password is too long",
+    "usernameMin": "Username must be at least 2 characters",
+    "usernameMax": "Username is too long",
+    "confirmPasswordRequired": "Please confirm your password",
+    "passwordsDontMatch": "Passwords do not match"
+  },
+  "serverErrors": {
+    "invalidCredentials": "Failed to sign in. Check your credentials.",
+    "somethingWentWrong": "Something went wrong. Please try again.",
+    "accountCreatedLoginFailed": "Account created, but failed to auto-login.",
+    "default": "An error occurred."
+  }
+}

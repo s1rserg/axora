@@ -1,0 +1,39 @@
+{
+  "signIn": {
+    "title": "Вхід",
+    "description": "Введіть свої дані для входу в акаунт",
+    "submit": "Увійти",
+    "noAccount": "Немає акаунту?",
+    "link": "Зареєструватися"
+  },
+  "signUp": {
+    "title": "Реєстрація",
+    "description": "Створіть новий акаунт, щоб почати",
+    "submit": "Зареєструватися",
+    "hasAccount": "Вже є акаунт?",
+    "link": "Увійти"
+  },
+  "fields": {
+    "email": "Електронна пошта",
+    "password": "Пароль",
+    "username": "Ім'я користувача",
+    "confirmPassword": "Підтвердження пароля",
+    "emailPlaceholder": "vash@email.com"
+  },
+  "validation": {
+    "email": "Некоректна електронна пошта",
+    "emailMax": "Email занадто довгий",
+    "passwordMin": "Пароль має містити мінімум 6 символів",
+    "passwordMax": "Пароль занадто довгий",
+    "usernameMin": "Ім'я має містити мінімум 2 символи",
+    "usernameMax": "Ім'я занадто довге",
+    "confirmPasswordRequired": "Будь ласка, підтвердіть пароль",
+    "passwordsDontMatch": "Паролі не співпадають"
+  },
+  "serverErrors": {
+    "invalidCredentials": "Не вдалося увійти. Перевірте ваші дані.",
+    "somethingWentWrong": "Щось пішло не так. Спробуйте ще раз.",
+    "accountCreatedLoginFailed": "Акаунт створено, але не вдалося увійти автоматично.",
+    "default": "Виникла помилка."
+  }
+}

@@ -3,7 +3,9 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
+
 import {
   Card,
   CardContent,
@@ -25,6 +27,7 @@ import { PasswordInput } from '@/components/password-input';
 import { AppRoutes } from '@/lib/routes';
 
 export function SignInForm() {
+  const t = useTranslations('auth');
   const [serverError, setServerError] = useState<Nullable<string>>(null);
 
   const form = useForm<SignInLocalDto>({
@@ -41,7 +44,6 @@ export function SignInForm() {
 
   async function onSubmit(data: SignInLocalDto) {
     setServerError(null);
-
     const response = await loginAction(data);
 
     if (response?.error) {
@@ -52,8 +54,8 @@ export function SignInForm() {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle>Sign In</CardTitle>
-        <CardDescription>Enter your credentials to access your account</CardDescription>
+        <CardTitle>{t('signIn.title')}</CardTitle>
+        <CardDescription>{t('signIn.description')}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -62,9 +64,9 @@ export function SignInForm() {
               control={control}
               clearErrors={clearErrors}
               name="email"
-              label="Email"
-              placeholder="you@example.com"
-              errorMsg={errors.email?.message}
+              label={t('fields.email')}
+              placeholder={t('fields.emailPlaceholder')}
+              errorMsg={errors.email?.message ? t(errors.email.message) : undefined}
               autoComplete="username"
             />
 
@@ -72,8 +74,8 @@ export function SignInForm() {
               control={control}
               clearErrors={clearErrors}
               name="password"
-              label="Password"
-              errorMsg={errors.password?.message}
+              label={t('fields.password')}
+              errorMsg={errors.password?.message ? t(errors.password.message) : undefined}
             />
 
             {serverError && (
@@ -81,16 +83,16 @@ export function SignInForm() {
             )}
 
             <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-              {form.formState.isSubmitting ? <Loader /> : 'Sign In'}
+              {form.formState.isSubmitting ? <Loader /> : t('signIn.submit')}
             </Button>
           </form>
         </Form>
       </CardContent>
       <CardFooter className="justify-center">
         <p className="text-sm text-muted-foreground">
-          Don&apos;t have an account?{' '}
+          {t('signIn.noAccount')}{' '}
           <Link href={AppRoutes.auth.register} className="text-primary hover:underline">
-            Sign up
+            {t('signIn.link')}
           </Link>
         </p>
       </CardFooter>
