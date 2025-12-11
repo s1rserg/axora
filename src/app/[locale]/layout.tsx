@@ -6,7 +6,9 @@ import { notFound } from 'next/navigation';
 import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
 import { Locale, routing } from '@/i18n';
-import { LanguageSwitcher } from '@/components/language-switcher';
+import { Header } from '@/components/header';
+import { ThemeProvider } from '@/theme';
+import { TooltipProvider } from '@/components/ui';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -39,16 +41,20 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
-          <div className="p-4">
-            <header className="flex justify-end mb-4">
-              <LanguageSwitcher />
-            </header>
-
-            {children}
-          </div>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <TooltipProvider>
+              <Header />
+              <main className="flex-1 container mx-auto p-4">{children}</main>
+            </TooltipProvider>
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>
