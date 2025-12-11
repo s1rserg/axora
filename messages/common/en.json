@@ -1,1 +1,14 @@
-{}
+{
+  "header": {
+    "theme": {
+      "light": "Switch to light mode",
+      "dark": "Switch to dark mode"
+    },
+    "language": "Change language",
+    "user": {
+      "hello": "Hello, {name}",
+      "logout": "Log out",
+      "label": "User menu"
+    }
+  }
+}

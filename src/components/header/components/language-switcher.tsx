@@ -1,17 +1,21 @@
 'use client';
 
 import { Check, Languages } from 'lucide-react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import {
   Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui';
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '../../ui';
 import { usePathname, useRouter, localeDetails, type Locale } from '@/i18n';
 
-export function LanguageSwitcher() {
+export const LanguageSwitcher = () => {
+  const t = useTranslations('common');
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -22,11 +26,19 @@ export function LanguageSwitcher() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" aria-label="Змінити мову">
-          <Languages className="h-[1.2rem] w-[1.2rem]" />
-        </Button>
-      </DropdownMenuTrigger>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon" aria-label={t('header.language')}>
+              <Languages className="h-[1.2rem] w-[1.2rem]" />
+            </Button>
+          </DropdownMenuTrigger>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{t('header.language')}</p>
+        </TooltipContent>
+      </Tooltip>
+
       <DropdownMenuContent align="end">
         {localeDetails.map((item) => (
           <DropdownMenuItem
@@ -43,4 +55,4 @@ export function LanguageSwitcher() {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};
