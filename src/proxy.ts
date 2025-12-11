@@ -1,13 +1,17 @@
+import createMiddleware from 'next-intl/middleware';
 import { auth } from '@/auth';
 import { AppRoutes } from '@/lib/routes';
+import { routing } from '@/i18n';
+
+const intlMiddleware = createMiddleware(routing);
 
 export default auth((req) => {
   const isLoggedIn = !!req.auth;
   const { nextUrl } = req;
 
   const isAuthRoute =
-    nextUrl.pathname.startsWith(AppRoutes.auth.login) ||
-    nextUrl.pathname.startsWith(AppRoutes.auth.register);
+    nextUrl.pathname.includes(AppRoutes.auth.login) ||
+    nextUrl.pathname.includes(AppRoutes.auth.register);
 
   const isPublicRoute = isAuthRoute;
 
@@ -18,8 +22,10 @@ export default auth((req) => {
   if (!isLoggedIn && !isPublicRoute) {
     return Response.redirect(new URL(AppRoutes.auth.login, nextUrl));
   }
+
+  return intlMiddleware(req);
 });
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!api|_next|.*\\..*).*)'],
 };
