@@ -5,5 +5,8 @@ export const AppRoutes = {
   },
   app: {
     root: '/',
+    products: {
+      create: '/products/create',
+    },
   },
 };

@@ -1,0 +1,62 @@
+{
+  "createProduct": {
+    "title": "Створити продукт",
+    "subtitle": "Додати новий продукт до вашого каталогу",
+    "submit": "Створити продукт",
+    "sections": {
+      "details": {
+        "title": "Деталі продукту",
+        "description": "Базова інформація про продукт"
+      },
+      "media": {
+        "title": "Медіа",
+        "description": "Перше зображення буде головним"
+      },
+      "settings": {
+        "title": "Налаштування",
+        "activeStatus": "Активний статус",
+        "activeDescription": "Продукт буде видимий у магазині"
+      }
+    },
+    "fields": {
+      "title": { "label": "Назва", "placeholder": "наприклад, iPhone 15 Pro" },
+      "slug": { "label": "Slug (URL)", "placeholder": "iphone-15-pro" },
+      "price": { "label": "Ціна", "placeholder": "0.00" },
+      "stock": { "label": "Кількість", "placeholder": "10" },
+      "description": { "label": "Опис", "placeholder": "Опис продукту..." }
+    }
+  },
+  "list": {
+    "title": "Продукти",
+    "subtitle": "Керуйте каталогом продуктів ({count})",
+    "addButton": "Додати новий",
+    "columns": {
+      "image": "Зображення",
+      "name": "Назва",
+      "price": "Ціна",
+      "stock": "Кількість",
+      "status": "Статус",
+      "actions": "Дії"
+    },
+    "status": {
+      "active": "Активний",
+      "draft": "Чернетка"
+    },
+    "empty": "Продукти не знайдено."
+  },
+  "serverErrors": {
+    "createFailed": "Не вдалося створити продукт",
+    "default": "Сталася помилка під час створення продукту"
+  },
+  "validation": {
+    "titleMin": "Назва має містити мінімум 3 символи",
+    "slugMin": "Slug має містити мінімум 3 символи",
+    "slugRegex": "Slug має містити тільки малі латинські літери, цифри та дефіси",
+    "priceMin": "Ціна має бути додатною",
+    "stockMin": "Кількість має бути додатним цілим числом",
+    "filesRequired": "Необхідно додати хоча б одне зображення",
+    "filesMax": "Дозволено максимум 10 зображень",
+    "filesSize": "Максимальний розмір файлу — 5 МБ",
+    "filesType": "Підтримуються лише формати .jpg, .jpeg, .png та .webp"
+  }
+}

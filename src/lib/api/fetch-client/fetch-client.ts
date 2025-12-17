@@ -5,18 +5,26 @@ import { AppRoutes } from '@/lib/routes';
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export async function fetchClient<T>(path: string, options: FetchOptions = {}): Promise<T> {
-  const session = await auth();
+  let token: string | undefined;
 
-  if (session?.error === 'RefreshAccessTokenError') {
-    await signOut({ redirect: true, redirectTo: AppRoutes.auth.login });
+  if (!options.skipAuth) {
+    const session = await auth();
+
+    if (session?.error === 'RefreshAccessTokenError') {
+      await signOut({ redirect: true, redirectTo: AppRoutes.auth.login });
+    }
+
+    token = session?.accessToken;
   }
-
-  const token = session?.accessToken;
 
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
     ...options.headers,
   };
+
+  if (options.body instanceof FormData) {
+    delete headers['Content-Type'];
+  }
 
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;

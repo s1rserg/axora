@@ -6,3 +6,4 @@ export * from './label';
 export * from './dropdown-menu';
 export * from './tooltip';
 export * from './separator';
+export * from './badge';
