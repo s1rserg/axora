@@ -10,5 +10,17 @@
       "logout": "Log out",
       "label": "User menu"
     }
+  },
+  "imageUploader": {
+    "dragActive": "Drop images here...",
+    "dragInactive": "Drag & drop images or click to select"
+  },
+  "actions": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "create": "Create"
+  },
+  "errors": {
+    "default": "Something went wrong"
   }
 }

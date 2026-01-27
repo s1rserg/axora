@@ -1,0 +1,62 @@
+{
+  "createProduct": {
+    "title": "Create Product",
+    "subtitle": "Add a new product to your catalog",
+    "submit": "Create Product",
+    "sections": {
+      "details": {
+        "title": "Product Details",
+        "description": "Basic information about the product"
+      },
+      "media": {
+        "title": "Media",
+        "description": "First image will be the main one"
+      },
+      "settings": {
+        "title": "Settings",
+        "activeStatus": "Active Status",
+        "activeDescription": "Product will be visible in the store"
+      }
+    },
+    "fields": {
+      "title": { "label": "Title", "placeholder": "e.g. iPhone 15 Pro" },
+      "slug": { "label": "Slug (URL)", "placeholder": "iphone-15-pro" },
+      "price": { "label": "Price", "placeholder": "0.00" },
+      "stock": { "label": "Stock", "placeholder": "10" },
+      "description": { "label": "Description", "placeholder": "Product description..." }
+    }
+  },
+  "list": {
+    "title": "Products",
+    "subtitle": "Manage your product catalog ({count})",
+    "addButton": "Add New",
+    "columns": {
+      "image": "Image",
+      "name": "Name",
+      "price": "Price",
+      "stock": "Stock",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "status": {
+      "active": "Active",
+      "draft": "Draft"
+    },
+    "empty": "No products found."
+  },
+  "serverErrors": {
+    "createFailed": "Failed to create product",
+    "default": "An error occurred while creating the product"
+  },
+  "validation": {
+    "titleMin": "Title must be at least 3 characters",
+    "slugMin": "Slug must be at least 3 characters",
+    "slugRegex": "Slug must contain only lowercase letters, numbers, and dashes",
+    "priceMin": "Price must be positive",
+    "stockMin": "Stock must be positive integer",
+    "filesRequired": "At least one image is required",
+    "filesMax": "Max 10 images allowed",
+    "filesSize": "Max file size is 5MB",
+    "filesType": "Only .jpg, .jpeg, .png and .webp formats are supported"
+  }
+}

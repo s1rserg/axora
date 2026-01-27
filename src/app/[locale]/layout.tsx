@@ -5,10 +5,11 @@ import { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
 import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
-import { Locale, routing } from '@/i18n';
+import { Locale, locales, routing } from '@/i18n';
 import { Header } from '@/components/header';
 import { ThemeProvider } from '@/theme';
 import { TooltipProvider } from '@/components/ui';
+import { setRequestLocale } from 'next-intl/server';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -25,18 +26,24 @@ export const metadata: Metadata = {
   description: 'E-commerce of the future. Built with Next.js.',
 };
 
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
 export default async function RootLayout({
   children,
   params,
 }: {
   children: ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
 
   if (!routing.locales.includes(locale as Locale)) {
     notFound();
   }
+
+  setRequestLocale(locale);
 
   const messages = await getMessages();
 

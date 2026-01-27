@@ -1,2 +1,2 @@
 export * from './routing';
-export { type Locale, localeDetails } from './config';
+export { type Locale, localeDetails, locales } from './config';
