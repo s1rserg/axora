@@ -42,6 +42,10 @@
       "active": "Active",
       "draft": "Draft"
     },
+    "cart": {
+      "addButton": "Add to Cart",
+      "added": "Added"
+    },
     "empty": "No products found."
   },
   "serverErrors": {

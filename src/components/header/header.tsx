@@ -1,25 +1,17 @@
 import { Link } from '@/i18n/routing';
-import { ThemeSwitcher, LanguageSwitcher, UserNav } from './components';
+import { ThemeSwitcher, LanguageSwitcher, UserNav, FavoriteLink, CartLink } from './components';
 import { AppRoutes } from '@/lib/routes';
 import Image from 'next/image';
-import { auth } from '@/auth';
-import { userService } from '@/lib/api';
+import { User } from '@/lib/api';
+import { Nullable } from '@/types/utils';
 
-export const Header = async () => {
-  const session = await auth();
+interface Props {
+  user: Nullable<User>;
+}
 
-  let user = null;
-
-  if (session) {
-    try {
-      user = await userService.fetchMe();
-    } catch (error) {
-      console.error('Session exists but failed to fetch user data:', error);
-    }
-  }
-
+export const Header = ({ user }: Props) => {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="container mx-auto flex h-14 items-center px-4">
         <div className="mr-4 flex">
           <Link href={AppRoutes.app.root} className="mr-6 flex items-center space-x-2">
@@ -32,7 +24,9 @@ export const Header = async () => {
           <nav className="flex items-center gap-1">
             <ThemeSwitcher />
             <LanguageSwitcher />
-            {user && <UserNav username={user.username} />}
+            <FavoriteLink />
+            <CartLink />
+            <UserNav initialUser={user} />
           </nav>
         </div>
       </div>

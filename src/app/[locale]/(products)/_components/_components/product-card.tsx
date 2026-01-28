@@ -5,6 +5,9 @@ import { Product } from '@/lib/api';
 import { FC } from 'react';
 import { ImageOff } from 'lucide-react';
 
+import { FavoriteButton } from './favorite-button';
+import { AddToCartButton } from './add-to-cart-button';
+
 interface Props {
   product: Product;
 }
@@ -15,7 +18,7 @@ export const ProductCard: FC<Props> = async ({ product }) => {
 
   return (
     <Card className="overflow-hidden flex flex-col h-full group py-0 transition-all hover:shadow-md">
-      <div className="relative aspect-[4/3] bg-muted">
+      <div className="relative aspect-4/3 bg-muted">
         {product.mainImage ? (
           <Image
             src={product.mainImage.secureUrl}
@@ -37,17 +40,21 @@ export const ProductCard: FC<Props> = async ({ product }) => {
             {product.isActive ? t('active') : t('draft')}
           </Badge>
         </div>
+        <div className="absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100">
+          <FavoriteButton product={product} />
+        </div>
       </div>
 
-      <CardContent className="p-4 pt-2 flex-grow">
+      <CardContent className="p-4 pt-2 grow">
         <div className="flex align-center justify-between">
-          <h3 className="font-semibold text-lg" title={product.title}>
+          <h3 className="font-semibold text-lg line-clamp-1" title={product.title}>
             {product.title}
           </h3>
           <span className="font-semibold text-lg">
             {format.number(product.price, { style: 'currency', currency: 'USD' })}
           </span>
         </div>
+        <AddToCartButton productId={product.id} />
       </CardContent>
     </Card>
   );

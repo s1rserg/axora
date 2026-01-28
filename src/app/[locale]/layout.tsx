@@ -10,6 +10,10 @@ import { Header } from '@/components/header';
 import { ThemeProvider } from '@/theme';
 import { TooltipProvider } from '@/components/ui';
 import { setRequestLocale } from 'next-intl/server';
+import { auth } from '@/auth';
+import { userService, favoriteService, cartService, Product, User } from '@/lib/api';
+import { StateProvider } from '@/providers/state-provider';
+import { CartItem } from '@/lib/api/services/cart/cart.service';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -45,7 +49,24 @@ export default async function RootLayout({
 
   setRequestLocale(locale);
 
+  const session = await auth();
   const messages = await getMessages();
+
+  let user = null;
+  let favorites: Product[] = [];
+  let cart: CartItem[] = [];
+
+  if (session) {
+    try {
+      [user, favorites, cart] = (await Promise.all([
+        userService.fetchMe(),
+        favoriteService.getAll(),
+        cartService.getCart(),
+      ])) as [User, Product[], CartItem[]];
+    } catch (error: unknown) {
+      console.error('Failed to fetch initial state:', error);
+    }
+  }
 
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -57,10 +78,12 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <TooltipProvider>
-              <Header />
-              <main className="flex-1 container mx-auto p-4">{children}</main>
-            </TooltipProvider>
+            <StateProvider initialFavorites={favorites} initialCart={cart}>
+              <TooltipProvider>
+                <Header user={user} />
+                <main className="flex-1 container mx-auto p-4">{children}</main>
+              </TooltipProvider>
+            </StateProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
