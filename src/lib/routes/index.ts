@@ -5,6 +5,8 @@ export const AppRoutes = {
   },
   app: {
     root: '/',
+    favorites: '/favorites',
+    cart: '/cart',
     products: {
       create: '/products/create',
     },
